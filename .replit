@@ -1,0 +1,27 @@
+run = "npm run start"
+entrypoint = "server/index.ts"
+modules = ["nodejs-20"]
+hidden = [".config", "package-lock.json", ".vite", "dist"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+deploymentTarget = "vm"
+build = ["npm", "install", "&&", "npm", "run", "build"]
+run = ["npm", "run", "start"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[env]
+NODE_ENV = "production"
+
+[languages]
+
+[languages.typescript]
+pattern = "**/{*.ts,*.tsx}"
+
+[languages.typescript.languageServer]
+start = "typescript-language-server --stdio"

@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The West Sussex Companion — light only, sandbelt cream + sepia ink. */
+:root {
+  /* Spec §8 — raw color tokens */
+  --bg: #EDE5D3;
+  --paper: #FAF6EA;
+  --paper-deep: #F5EFDF;
+  --ink: #2A2618;
+  --ink-muted: #6B6356;
+  --ink-soft: rgba(42, 38, 24, 0.7);
+  --rule: #CCC3B0;
+  --ink-accent: #5A4A2A;
+  --status-good: #5A7A3A;
+  --status-mid: #C89436;
+  --status-bad: #A64430;
+  --status-none: #CCC3B0;
+  --heather-tint: rgba(122, 84, 122, 0.04);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono-pro: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-display);
+  --font-mono: var(--font-mono-pro);
+
+  /* shadcn HSL tokens mapped to warm sandbelt palette */
+  --background: 39 35% 88%;
+  --foreground: 41 27% 13%;
+  --border: 39 22% 74%;
+  --input: 39 22% 74%;
+  --card: 45 56% 95%;
+  --card-foreground: 41 27% 13%;
+  --card-border: 39 22% 74%;
+  --popover: 45 56% 95%;
+  --popover-foreground: 41 27% 13%;
+  --popover-border: 39 22% 74%;
+  --primary: 36 38% 26%;
+  --primary-foreground: 45 56% 95%;
+  --secondary: 39 30% 86%;
+  --secondary-foreground: 41 27% 13%;
+  --muted: 39 30% 86%;
+  --muted-foreground: 36 11% 38%;
+  --accent: 39 30% 82%;
+  --accent-foreground: 41 27% 13%;
+  --destructive: 9 56% 42%;
+  --destructive-foreground: 45 56% 95%;
+  --ring: 36 38% 26%;
+  --chart-1: 89 35% 35%;
+  --chart-2: 36 56% 50%;
+  --chart-3: 9 56% 42%;
+  --chart-4: 39 22% 60%;
+  --chart-5: 36 38% 26%;
+  --sidebar: 45 56% 95%;
+  --sidebar-foreground: 41 27% 13%;
+  --sidebar-border: 39 22% 74%;
+  --sidebar-primary: 36 38% 26%;
+  --sidebar-primary-foreground: 45 56% 95%;
+  --sidebar-accent: 39 30% 86%;
+  --sidebar-accent-foreground: 41 27% 13%;
+  --sidebar-ring: 36 38% 26%;
+
+  --radius: 2px;
+
+  --button-outline: rgba(42, 38, 24, 0.12);
+  --badge-outline: rgba(42, 38, 24, 0.08);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(42, 38, 24, 0.04);
+  --elevate-2: rgba(42, 38, 24, 0.08);
+
+  --shadow-card: 0 1px 0 rgba(42, 38, 24, 0.04), 0 24px 48px -24px rgba(42, 38, 24, 0.18);
+  --shadow-2xs: 0px 1px 0 rgba(42, 38, 24, 0.04);
+  --shadow-xs: 0px 1px 0 rgba(42, 38, 24, 0.04);
+  --shadow-sm: 0px 1px 0 rgba(42, 38, 24, 0.04);
+  --shadow: var(--shadow-card);
+  --shadow-md: var(--shadow-card);
+  --shadow-lg: var(--shadow-card);
+  --shadow-xl: var(--shadow-card);
+  --shadow-2xl: var(--shadow-card);
+
+  --primary-border: hsl(var(--primary));
+  --secondary-border: hsl(var(--secondary));
+  --muted-border: hsl(var(--muted));
+  --accent-border: hsl(var(--accent));
+  --destructive-border: hsl(var(--destructive));
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-accent-border: hsl(var(--sidebar-accent));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body, #root {
+    background-color: var(--bg);
+    color: var(--ink);
+  }
+
+  body {
+    @apply antialiased;
+    font-family: var(--font-ui);
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Tabular figures for any mono usage */
+  .font-mono, code, pre, kbd, samp {
+    font-feature-settings: 'tnum' 1, 'cv02' 1;
+  }
+
+  /* Visible focus rings */
+  :focus-visible {
+    outline: 2px solid var(--ink-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(90, 74, 42, 0.18);
+    color: var(--ink);
+  }
+
+  /* Page enter — 200ms fade only */
+  @keyframes page-enter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  main {
+    animation: page-enter 200ms ease-out;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-ui { font-family: var(--font-ui); }
+  .font-mono-pro { font-family: var(--font-mono-pro); font-feature-settings: 'tnum' 1; }
+
+  .ink { color: var(--ink); }
+  .ink-muted { color: var(--ink-muted); }
+  .ink-soft { color: var(--ink-soft); }
+
+  .bg-paper { background-color: var(--paper); }
+  .bg-paper-deep { background-color: var(--paper-deep); }
+  .bg-canvas { background-color: var(--bg); }
+
+  .rule-hairline { border: 1px solid var(--rule); }
+  .border-rule { border-color: var(--rule); }
+
+  .paper-card {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .small-caps {
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+
+  /* Hole tile hover lift */
+  .tile-hover {
+    transition: transform 120ms ease-out, background-color 120ms ease-out;
+  }
+  .tile-hover:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Button press */
+  button, [role="button"] {
+    transition: transform 80ms ease-out, background-color 120ms ease-out, color 120ms ease-out, border-color 120ms ease-out, opacity 120ms ease-out;
+  }
+  button:active:not(:disabled), [role="button"]:active:not([aria-disabled="true"]) {
+    transform: scale(0.98);
+  }
+
+  /* Detail panel reveal */
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { animation: reveal 180ms ease-out; }
+
+  /* Status colors as utilities */
+  .status-good-fg { color: var(--status-good); }
+  .status-mid-fg { color: var(--status-mid); }
+  .status-bad-fg { color: var(--status-bad); }
+  .status-none-fg { color: var(--status-none); }
+
+  .status-good-bg { background-color: var(--status-good); }
+  .status-mid-bg { background-color: var(--status-mid); }
+  .status-bad-bg { background-color: var(--status-bad); }
+  .status-none-bg { background-color: var(--status-none); }
+
+  input[type='search']::-webkit-search-cancel-button { @apply hidden; }
+
+  /* Elevate system */
+  .hover-elevate, .active-elevate, .hover-elevate-2, .active-elevate-2 {
+    position: relative;
+    z-index: 0;
+  }
+  .hover-elevate::after, .active-elevate::after, .hover-elevate-2::after, .active-elevate-2::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: 999;
+  }
+  .hover-elevate:hover::after, .active-elevate:active::after { background-color: var(--elevate-1); }
+  .hover-elevate-2:hover::after, .active-elevate-2:active::after { background-color: var(--elevate-2); }
+  .border.hover-elevate::after, .border.active-elevate::after, .border.hover-elevate-2::after, .border.active-elevate-2::after { inset: -1px; }
+}
