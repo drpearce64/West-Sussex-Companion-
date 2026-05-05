@@ -1,4 +1,4 @@
-run = "npm run start"
+run = "npm run dev"
 entrypoint = "server/index.ts"
 modules = ["nodejs-20"]
 hidden = [".config", "package-lock.json", ".vite", "dist"]
@@ -15,8 +15,8 @@ run = ["npm", "run", "start"]
 localPort = 5000
 externalPort = 80
 
-[env]
-NODE_ENV = "production"
+# NODE_ENV is set per-script (npm run dev = development, npm run start = production).
+# The deployment block above runs `npm run start` which sets NODE_ENV=production.
 
 [languages]
 
